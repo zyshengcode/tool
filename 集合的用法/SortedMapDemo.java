@@ -20,7 +20,7 @@ import java.util.TreeMap;
  *
  *
  *
- *         利用有序集合通过其他方法来对集合中添加想要的元素,翻入重复元素会被覆盖掉，说明key其实可以重复，只不过会覆盖原有的value
+ *         利用有序集合通过其他方法来对集合中添加想要的元素,放入重复元素会被覆盖掉，说明key其实可以重复，只不过会覆盖原有的value
  */
 public class SortedMapDemo {
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+						http://www.springframework.org/schema/rabbit
+						http://www.springframework.org/schema/rabbit/spring-rabbit-1.4.xsd"
+       default-lazy-init="true">
+
+    <description>RabbitMQ示例 接收消息 配置</description>
+    <import resource="spring-rabbitmq-queue.xml"/>
+
+   
+
+    <!-- 凭证 -->
+    <rabbit:queue id="sap.voucher.receipts" name="sap.voucher.receipts"
+                  auto-declare="true" declared-by="rabbitAdmin" auto-delete="false"
+                  exclusive="false" durable="true"/>
+
+    <!-- 接收消息监听器 -->
+    <rabbit:listener-container id="listner.receipt.processData"
+                               acknowledge="auto" concurrency="3"
+                               prefetch="10" max-concurrency="5" auto-startup="true" advice-chain="adviceChain"
+                               auto-declare="true" connection-factory="rabbitConnectionFactory">
+
+   
+
+        <!-- 门店凭证 -->
+        <rabbit:listener queues="sap.voucher.receipts" ref="reStoreVoucherServiceImpl" method="saveDateFromStrore"/>
+
+  
+    </rabbit:listener-container>
+
+
+</beans>

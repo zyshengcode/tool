@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+						http://www.springframework.org/schema/rabbit
+						http://www.springframework.org/schema/rabbit/spring-rabbit-1.4.xsd"
+	   default-lazy-init="true">
+
+	<description>RabbitMQ示例 发送消息配置</description>
+	<import resource="spring-rabbitmq-queue.xml" />
+
+	
+	<!-- 门店长短款-->
+	<rabbit:queue id="sap.voucher.receipts" name="store.voucher.receipts"
+				  auto-declare="true" declared-by="rabbitAdmin" auto-delete="false"
+				  exclusive="false" durable="true" />
+
+	<rabbit:direct-exchange id="exchange.direct"
+							auto-declare="true" name="exchange.direct" auto-delete="false"
+							durable="true" declared-by="rabbitAdmin">
+		<rabbit:bindings>
+			
+			<!--门店长短款-->
+			<rabbit:binding key="sap.voucher.receipts" queue="sap.voucher.receipts" />
+
+		
+		</rabbit:bindings>
+	</rabbit:direct-exchange>
+	
+
+</beans>

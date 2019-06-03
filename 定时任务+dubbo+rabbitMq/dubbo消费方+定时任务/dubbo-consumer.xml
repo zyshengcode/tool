@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans          
+    http://www.springframework.org/schema/beans/spring-beans.xsd          
+    http://code.alibabatech.com/schema/dubbo          
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!-- 使用zookeeper注册中心暴露服务地址 -->
+    <!-- <dubbo:registry address="zookeeper://127.0.0.1:2181" 10.200.34.128:2181,10.200.34.128:2182,10.200.34.128:2183 10.3.13.201:2181,10.3.13.202:2181,10.3.13.203:2181/>-->
+    <!--<dubbo:registry protocol="zookeeper" address="10.200.34.128:2181,10.200.34.128:2182,10.200.34.128:2183"
+		check="false" />	--> 
+<!-- 	<dubbo:registry protocol="zookeeper" address="10.3.13.201:2181,10.3.13.202:2181,10.3.13.203:2181" check="false" /> -->
+	<!-- sit -->
+	<dubbo:registry protocol="zookeeper" address="${zookeeper.address}" check="false" />
+    
+	
+
+    <!--结算模块生成积分清理SAP凭证-->
+    <dubbo:reference id="iSapVoucherPClearService" interface="com.ibm.modules.oms.service.ISapVoucherPClearService" check="false" url="dubbo://169.254.210.6:20883"/>
+	
+	<!--url="dubbo://169.254.210.6:20883" 可要可不要，要的目的，用来指向本地的dubbo提供方-->
+</beans>

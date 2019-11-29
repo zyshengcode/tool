@@ -1,0 +1,33 @@
+List<? extends MaprEntity> cs 
+
+JSON.toJSONString(cs, SerializerFeature.WriteNullStringAsEmpty)
+
+转换之属性_id不见了
+
+原因：源码路径package com.alibaba.fastjson.util;
+
+  char c3 = methodName.charAt(3);
+                String propertyName;
+                if(Character.isUpperCase(c3) //
+                        || c3 > 512 // for unicode method name
+                        ){
+                    if(compatibleWithJavaBean){
+                        propertyName = decapitalize(methodName.substring(3));
+                    } else{
+                        propertyName = Character.toLowerCase(methodName.charAt(3)) + methodName.substring(4);
+                    }
+                    propertyName = getPropertyNameByCompatibleFieldName(fieldCacheMap, methodName, propertyName, 3);
+                } else if(c3 == '_'){
+                    propertyName = methodName.substring(4);
+                } else if(c3 == 'f'){
+                    propertyName = methodName.substring(3);
+                } else if(methodName.length() >= 5 && Character.isUpperCase(methodName.charAt(4))){
+                    propertyName = decapitalize(methodName.substring(3));
+                } else{
+                    continue;
+                }
+
+fastjson获得JavaBean对象属性作为json中key的方式是通过截取JavaBean中属性的getter方法名得，
+而c3是获取的方法名的index=3，也就是第四个字母。而因为我的getter和setter方法工具得到，
+因此getter方法名get_id的第四个位置是下划线,而当该位置是下划线时，
+默认获取的属性名(也就是_id转为json中的key)是从下一个位置开始的，最终propertyName=”id”.

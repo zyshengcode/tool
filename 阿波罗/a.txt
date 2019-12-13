@@ -1,0 +1,13 @@
+       
+在一个新的类中使用，需要在启动的时候传入不同环境的参数
+	 CarrefourApolloConfig config = new CarrefourApolloConfig(args[0]);
+        Map<String, String> cmcsmpostMap = config.getCmcsmpostMap();
+
+
+        long duration = Long.parseLong(cmcsmpostMap.get("duration"));
+        String groupId = cmcsmpostMap.get("groupId");
+        String autoOffsetReset = cmcsmpostMap.get("autoOffsetReset");
+        String topic = cmcsmpostMap.get("topic");
+        String appName = cmcsmpostMap.get("appName");
+
+

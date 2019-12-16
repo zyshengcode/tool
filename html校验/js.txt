@@ -1,0 +1,15 @@
+﻿    <select name="type" id="aaa" onchange="show_sub()">    
+        <option value="0">请选择主菜名</option>    
+        <option value="1">白菜</option>    
+        <option value="2">萝卜</option>    
+     </select> 
+
+
+
+ js代码
+
+     function show_sub(){     
+    	       alert($("#aaa").find("option:selected").attr("value"));//原生  
+    	        alert($("#aaa").find("option:selected").val());  //加入jq库
+     
+    	    } 

@@ -1,0 +1,20 @@
+﻿/*	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")              ----------指定时间类型数据的格式
+	@ExcelField(title="收银日期时间", align=2, sort=18)
+	public Date getZopDate() {
+		return zopDate;
+	}
+
+	public void setZopDate(Date zopDate) {
+		this.zopDate = zopDate;
+	}
+	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@ExcelField(title="收银时间", align=2, sort=19)
+	public Date getZopTime() {
+		return zopTime;
+	}
+
+	public void setZopTime(Date zopTime) {
+		this.zopTime = zopTime;
+	}
+	*/

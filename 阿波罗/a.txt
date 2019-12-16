@@ -1,6 +1,9 @@
        
-在一个新的类中使用，需要在启动的时候传入不同环境的参数
-	 CarrefourApolloConfig config = new CarrefourApolloConfig(args[0]);
+在一个新的类中使用，需要在启动的时候传入不同环境的参数，在截图中有显示，如果是测试环境
+那么我们传入TEST，   根据配置类会拿到TEST.yml  从而获取信息
+
+
+	 ApolloConfig config = new ApolloConfig(args[0]);
         Map<String, String> cmcsmpostMap = config.getCmcsmpostMap();
 
 
